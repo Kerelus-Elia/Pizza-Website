@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza K</title>
+    <link rel="icon" href="img/Red and Orange Pizza Business Logo.png" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: url(img/pizza-pizza-filled-with-tomatoes-salami-olives.jpg)
+          no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        line-height: 1.6;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: rgba(192, 57, 43, 0.95);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        position: relative;
+      }
+
+      .logo {
+        font-family: cursive;
+        font-size: 1.7rem;
+      }
+
+      #pizza-logo {
+        width: 100px;
+        height: 100px;
+        border-radius: 120px;
+      }
+
+      .nav-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .nav-center ul {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+      }
+
+      .nav-center ul a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 20px;
+        transition: color 0.3s ease;
+        font-family: cursive;
+      }
+
+      .nav-center ul a:hover {
+        color: #f1c40f;
+        border-bottom: 3px solid orange;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 0.8rem;
+      }
+
+      .auth-btn {
+        padding: 0.5rem 1.2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .auth-btn.login {
+        background-color: #d05555;
+        color: white;
+      }
+
+      .auth-btn.login:hover {
+        background-color: #d68910;
+      }
+
+      .auth-btn.signup {
+        background-color: #d05555;
+        color: white;
+      }
+
+      .auth-btn.signup:hover {
+        background-color: #1e8449;
+      }
+
+      /* Hero */
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 4rem 2rem;
+        min-height: 80vh;
+        border-radius: 0 0 20px 20px;
+      }
+
+      .hero img {
+        max-width: 300px;
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-text {
+        max-width: 500px;
+        font-size: 1rem;
+        color: #fff;
+      }
+
+      .hero-text h1 {
+        font-size: 2.2rem;
+        color: #ffcc00;
+        margin-bottom: 1rem;
+      }
+
+      /* Sections */
+      .section {
+        background-color: rgba(0, 0, 0, 0.55);
+        border-radius: 15px;
+        padding: 4rem 2rem;
+        margin: 3rem 2rem;
+        text-align: center;
+        min-height: 65vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        backdrop-filter: blur(3px);
+      }
+
+      .section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        color: #ffd700;
+      }
+
+      .section p {
+        font-size: 1rem;
+        max-width: 700px;
+        margin: 0 auto;
+        color: #fffdd0;
+      }
+
+      /* Pizza Cards */
+      .pizza-items {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .pizza-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        width: 220px;
+        color: #fff;
+        backdrop-filter: blur(3px);
+      }
+
+      .pizza-card img {
+        width: 100%;
+        border-radius: 10px;
+      }
+
+      .pizza-card h3 {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+      }
+
+      /* Order Button */
+      .order-btn {
+        display: inline-block;
+        margin-top: 2rem;
+        background: #e67e22;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-family: cursive;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      .order-btn:hover {
+        background: #d35400;
+        transform: scale(1.05);
+      }
+
+      .auth-btn.logout {
+        background-color: #d05555;
+        color: #fff !important;
+      }
+
+      /* Footer */
+      footer {
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+        border-top: 2px solid #f1c40f;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .pizza-items {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .hero-text h1 {
+          font-size: 1.6rem;
+        }
+
+        .hero-text p,
+        .section p {
+          font-size: 0.95rem;
+        }
+
+        .section h2 {
+          font-size: 1.6rem;
+        }
+
+        .nav-center {
+          position: static;
+          transform: none;
+          margin-top: 1rem;
+        }
+
+        .nav-center ul {
+          justify-content: center;
+        }
+
+        .auth-buttons {
+          flex-direction: column;
+          margin-top: 1rem;
+        }
+
+        .auth-btn {
+          font-size: 14px;
+          padding: 0.4rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <img
+          src="img/Red and Orange Pizza Business Logo.png"
+          alt="logo"
+          id="pizza-logo"
+        />
+      </div>
+
+      <div class="nav-center">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#order-Now">Order</a></li>
+          <li><a href="/reserve">Reserve Table</a></li>
+        </ul>
+      </div>
+
+      <div class="auth-buttons">
+        <a href="/login" class="auth-btn login">Login</a>
+        <a href="/signup" class="auth-btn signup">Sign Up</a>
+        <a href="/" class="auth-btn logout" style="display: none">Logout</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-up">
+      <div class="hero-text">
+        <h1>Welcome to Pizza K</h1>
+        <p>Delicious, hot & cheesy pizza made just for you 🍕</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" data-aos="fade-right">
+      <h2>About Us</h2>
+      <p>
+        At Pizza K, we believe that great pizza starts with passion and quality.
+        Since our founding in 2000, we've dedicated ourselves to crafting
+        delicious, oven-baked pizzas using the freshest ingredients, authentic
+        Italian recipes, and lots of love. Whether you're craving a classic
+        Margherita or something bold like BBQ Chicken, our menu has something
+        for everyone. Join us for a slice, and taste the difference!
+      </p>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="section featured" data-aos="fade-left">
+      <h2>Featured Pizzas</h2>
+      <div class="pizza-items">
+        <div class="pizza-card">
+          <img src="img/Margherita.jpeg" alt="Margherita" />
+          <h3>Margherita</h3>
+        </div>
+        <div class="pizza-card">
+          <img src="img/Pepperoni.webp" alt="Pepperoni" />
+          <h3>Pepperoni</h3>
+        </div>
+        <div class="pizza-card">
+          <img src="img/BBQ Chicken.jpg" alt="BBQ Chicken" />
+          <h3>BBQ Chicken</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ingredients -->
+    <section class="section ingredients" data-aos="fade-right">
+      <h2>Fresh Ingredients</h2>
+      <p>
+        We take pride in using only the freshest and highest quality ingredients
+        in every pizza we make. From farm-picked vegetables to premium cuts of
+        meat and 100% real mozzarella cheese, every bite is crafted with care.
+        Our dough is prepared fresh daily, our sauces are made from ripe, juicy
+        tomatoes, and we never compromise on taste or quality. Because when it
+        comes to pizza, fresh is everything!
+      </p>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials" data-aos="fade-left">
+      <h2>What Our Customers Say</h2>
+      <p>"The best pizza I’ve ever had!" - Sarah</p>
+      <p>"Amazing crust and fast delivery!" - Omar</p>
+    </section>
+
+    <!-- Contact Promo -->
+    <section class="section contact-promo" data-aos="fade-up" id="order-Now">
+      <h2>Order Now!</h2>
+      <p>Call us or visit our menu to make your first order 🍕</p>
+      <a href="order.html" class="order-btn">View Menu</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Pizza House | All Rights Reserved</p>
+    </footer>
+
+    <!-- Scroll Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        offset: 120,
+        easing: "ease-in-out",
+      });
+      const resAPI = async () => {
+        try {
+          let res = await fetch("/check-session", { credentials: "include" });
+          const data = await res.json();
+          if (data.fullname) {
+            document.querySelector(".hero-text h1").innerHTML = `Welcome to Pizza K, ${data.fullname}!`;
+            document.querySelector(".login").style.display = "none";
+            document.querySelector(".signup").style.display = "none";
+            document.querySelector(".logout").style.display = "inline-block";
+          } else {
+            document.querySelector(".hero-text").innerHTML = `<h1>Welcome to Pizza K!</h1>`;
+            document.querySelector(".login").style.display = "inline-block";
+            document.querySelector(".signup").style.display = "inline-block";
+            document.querySelector(".logout").style.display = "none";
+          }
+        } catch (e) {
+          console.error("cannot load the home page.!", e);
+        }
+        document.querySelector(".logout").onclick = async () => {
+          await fetch("/logout", { method: "POST", credentials: "include" });
+          window.location.reload();
+        };
+      };
+      document.addEventListener("DOMContentLoaded", resAPI);
+    </script>
+  </body>
+</html>

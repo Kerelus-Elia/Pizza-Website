@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Pizza K</title>
+    <link rel="icon" href="img/Red and Orange Pizza Business Logo.png" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: url(img/pizza-pizza-filled-with-tomatoes-salami-olives.jpg)
+          no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        line-height: 1.6;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .login-box {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 2.5rem 3rem;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .login-box h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #ffd700;
+        font-size: 2rem;
+      }
+
+      .login-box label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #fffdd0;
+      }
+
+      .login-box input[type="email"],
+      .login-box input[type="password"] {
+        width: 100%;
+        padding: 0.7rem;
+        margin-bottom: 1rem;
+        border: none;
+        border-radius: 5px;
+        background: #fff;
+        font-size: 1rem;
+      }
+
+      .login-box button {
+        width: 100%;
+        background: #e67e22;
+        color: white;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-weight: bold;
+      }
+
+      .login-box button:hover {
+        background: #d35400;
+      }
+
+      .login-box .signup-link {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .login-box .signup-link a {
+        color: #f1c40f;
+        text-decoration: none;
+      }
+
+      .login-box .signup-link a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 500px) {
+        .login-box {
+          padding: 2rem 1.5rem;
+        }
+
+        .login-box h2 {
+          font-size: 1.7rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" data-aos="zoom-in">
+      <form class="login-box" method="POST" action="/login" id="form">
+        <h2>Login to Pizza K</h2>
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="you@example.com"
+        />
+        <small id="emailerror" style="color: red; font-family: cursive"></small>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter your password"
+        />
+        <small id="passerror" style="color: red; font-family: cursive"></small>
+        <button type="submit" id="btn">Login</button>
+
+        <div class="signup-link">
+          Don't have an account? <a href="signup.html">Sign up here</a>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        easing: "ease-in-out",
+      });
+      let email = document.getElementById("email");
+      let pass = document.getElementById("password");
+      let form = document.getElementById("form");
+      let btn = document.getElementById("btn");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let validemail = checkemail();
+        let validpass = checkpass();
+        if (validemail && validpass) {
+          alert("welcome to the pizza K ");
+          window.location = "main.html";
+        }
+      });
+      function checkemail() {
+        let valid = false;
+        let error = document.getElementById("emailerror");
+        let emailvalue = email.value.trim();
+        if (emailvalue == "") {
+          error.textContent = "please enter your email";
+        } else {
+          valid = true;
+          error.textContent = "";
+        }
+        return valid;
+      }
+      function checkpass() {
+        let valid = false;
+        const min = 8;
+        const max = 25;
+        let error = document.getElementById("passerror");
+        let passvalue = pass.value.trim();
+        if (passvalue == "") {
+          error.textContent = "please enter your password";
+        } else if (passvalue.length < min || passvalue.length > max) {
+          error.textContent = `please enter password between ${min} and ${max} characters`;
+        } else {
+          valid = true;
+          error.textContent = "";
+        }
+        return valid;
+      }
+      email.addEventListener("focus", () => {
+        let error = document.getElementById("emailerror");
+        error.textContent = "";
+      });
+      pass.addEventListener("focus", () => {
+        let error = document.getElementById("passerror");
+        error.textContent = "";
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const data = new URLSearchParams(formData);
+
+          try {
+            const res = await fetch("/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: data,
+            });
+
+            const result = await res.json();
+            if (result.success) {
+              window.location.href = "/";
+            } else {
+              alert("Wrong email or password");
+            }
+          } catch (err) {
+            console.error("Login error", err);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reserve a Table - Pizza K</title>
+    <link rel="icon" href="img/Red and Orange Pizza Business Logo.png" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: url(img/pizza-pizza-filled-with-tomatoes-salami-olives.jpg)
+          no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        line-height: 1.6;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+      }
+
+      .section {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 15px;
+        padding: 3rem 2rem;
+        width: 100%;
+        max-width: 700px;
+        text-align: center;
+        backdrop-filter: blur(4px);
+      }
+
+      h2 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      input,
+      select {
+        padding: 0.8rem;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+      }
+
+      input:focus,
+      select:focus {
+        outline: 2px solid #f39c12;
+      }
+
+      .submit-btn {
+        background: #e67e22;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      .submit-btn:hover {
+        background: #d35400;
+        transform: scale(1.05);
+      }
+
+      footer {
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+        border-top: 2px solid #f1c40f;
+      }
+
+      @media (max-width: 768px) {
+        .section {
+          padding: 2rem 1.5rem;
+        }
+
+        form input,
+        form select {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <section class="section" data-aos="fade-up">
+        <h2>Reserve a Table 🍽️</h2>
+        <form action="/reserve" method="POST">
+          <input type="text" name="name" placeholder="Your Name" />
+          <input type="tel" name="phone" placeholder="Phone Number" />
+          <input
+            type="text"
+            name="nogates"
+            placeholder="enter number of gustes"
+          />
+          <input type="date" name="date" />
+          <input type="time" name="time" />
+          <input type="submit" value="Confirm Reservation" class="submit-btn" />
+        </form>
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Pizza K | All Rights Reserved</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        offset: 120,
+        easing: "ease-in-out",
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        form.onsubmit = async function (e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const data = {};
+          formData.forEach((value, key) => (data[key] = value));
+
+          try {
+            const res = await fetch("/reserve", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+            const result = await res.json();
+            if (res.ok) {
+              alert(result.message || "Reservation successful!");
+              form.reset();
+            } else {
+              alert(result.message || "Reservation failed!");
+            }
+          } catch (err) {
+            alert("Something went wrong!");
+            console.error(err);
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
