@@ -7,7 +7,7 @@ This project was built to simulate a real-world pizza store experience with sess
 
 ## 🌐 Live Preview
 
-> _Optional_: Add if hosted online.
+> https://pizza-website-production.up.railway.app/
 
 ---
 
