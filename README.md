@@ -13,7 +13,8 @@ This project was built to simulate a real-world pizza store experience with sess
 
 ## 🖼️ Screenshots
 
-![image](https://github.com/user-attachments/assets/818441bc-689f-49cc-a107-8265a724dd14)
+![Uploading image.png…]()
+
 
 ## 📌 Features
 
