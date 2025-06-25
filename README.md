@@ -1,36 +1,69 @@
-# 🍕 Pizza K - Full Stack Pizza Ordering Website
+# 🍕 Pizza K
+A dynamic and interactive pizza restaurant website built using TypeScript, Node.js, and Express, allowing users to sign up, log in, order pizza, and reserve tables online with data persistence using local JSON files.
 
-**Pizza K** is a full-stack pizza restaurant website that allows users to view a menu, register, log in, browse pizzas, add them to a cart, and place an order.  
-This project was built to simulate a real-world pizza store experience with session-based authentication, animated UI, and local JSON-based order saving.
-
----
-
-## 🌐 Live Preview
-
-> https://pizza-website-production.up.railway.app/
-
----
+## 🌐 Live Demo
+👉 https://pizza-website-production.up.railway.app/
 
 ## 🖼️ Screenshots
 
 ![image](https://github.com/user-attachments/assets/e71e0014-61b6-4f0f-aeb9-ae28349dce0d)
 
 
-## 📌 Features
+## 📌 Overview
+Pizza K is a modern pizza restaurant website with user authentication, interactive menus, and real-time table reservation functionality. The project simulates a restaurant ordering system with static front-end pages and a back-end logic built using Express and file-based storage.
 
-- Responsive landing page with background image and smooth animations
-- Session-based login and signup system
-- Dynamic navbar that reflects user session state
-- Full menu page with add-to-cart and order confirmation
-- Live cart view and quantity management
-- Orders saved persistently in `orders.json`
-- Frontend animations powered by [AOS.js](https://michalsnik.github.io/aos/)
-- Clear UI/UX using pure HTML/CSS + Vanilla JS
+```
+✨ Key Features
 
----
+🔐 User Authentication (Signup & Login)
 
-## 🛠️ Technologies Used
+🧾 Pizza Ordering System with dynamic form handling
 
+📅 Table Reservation feature with date & time input
+
+📂 Data persistence using .json files (for orders, reservations, and customers)
+
+🌐 Clean HTML/CSS Frontend hosted via Railway
+
+🧠 Modular codebase with middleware, routing, and models
+```
+
+```
+## 📁 Project Structure
+
+graphql
+Copy
+Edit
+PIZZA-K-MAIN/
+├── dist/                     # Compiled JavaScript files (from TypeScript)
+├── node_modules/            # Project dependencies
+├── public/                  # Static frontend assets
+│   ├── img/                 # Images used in the website
+│   ├── login.html           # Login page
+│   ├── main.html            # Homepage
+│   ├── order.html           # Pizza ordering page
+│   ├── reservation.html     # Table reservation page
+│   └── signup.html          # Signup page
+├── src/                     # TypeScript source code
+│   ├── middleware/          # Custom middleware
+│   │   ├── validator.ts     # Input validation logic
+│   │   └── writejsonfile.ts # Utility to write to JSON files
+│   ├── modules/             # Data models
+│   │   ├── customer.ts      # Customer model
+│   │   └── Table.ts         # Table reservation model
+│   ├── routes/              # Express routes
+│   │   ├── loginRoute.ts
+│   │   ├── mainRoute.ts
+│   │   ├── orderRoute.ts
+│   │   ├── reserveRoute.ts
+│   │   └── signupRoute.ts
+│   └── server.ts            # Main server entry point
+├── customers.json           # Stores registered users
+├── order.json               # Stores placed orders
+└── reservations.json        # Stores table reservations
+```
+
+## ⚙️ Technologies Used
 | Layer       | Tools / Tech Used                                       |
 |-------------|----------------------------------------------------------|
 | **Frontend**| HTML5, CSS3, JavaScript, AOS.js                          |
@@ -39,52 +72,33 @@ This project was built to simulate a real-world pizza store experience with sess
 | **Session** | `express-session` for authentication                    |
 | **Middleware** | Custom session check and JSON handling              |
 
----
 
-## 🗂️ Project Structure
+## 🧠 Code Highlights
+All route files in src/routes/ map to specific endpoints and handle form submissions.
 
-```bash
-Pizza-K/
-├── public/
-│   ├── img/                        # All images used (menu items, logo...)
-│   ├── login.html                  # Login page
-│   ├── signup.html                 # Signup page
-│   ├── index.html                  # Homepage
-│   ├── order.html                  # Order menu page
-│
-├── src/
-│   ├── routes/
-│   │   ├── authrouter.ts          # Login, signup, logout handling
-│   │   ├── orderrouter.ts         # Order placing and cart API
-│   │
-│   ├── app.ts                     # Express app config & middleware
-│
-├── orders.json                    # Stores all orders with user & time
-├── Customers.json                 # Stores registered users
-├── tsconfig.json                  # TypeScript configuration
-├── package.json                   # Project dependencies
-```
-```
-🔐 Authentication Flow
+Validation logic (like checking for existing users or duplicate reservations) is inside validator.ts.
 
-Users can register via /signup.html
+File-writing utility (writejsonfile.ts) ensures JSON storage is updated reliably.
 
-After registration, they're stored in users.json
+Models like customer.ts and Table.ts define the structure of data stored in the system
 
-Once logged in, session is set via express-session
 
-Orders cannot be placed without logging in
-```
-```
-🛒 Cart System Logic
+## 📬 API Routes (Examples)
+| Method   | Route	Description          |
+|----------|-----------------------------|
+| **POST** | /signup	Register new user  |
+| **POST** | /login	Authenticate user    |
+| **POST** | /order	Submit pizza order   |
+| **POST** | /reserve	Submit reservation |
 
-Cart managed fully on client side (JavaScript)
 
-Items can be added with "Add to Cart" button
+## 📄 Pages Description
+|    Page    |          	           Description                                     |
+|------------|-----------------------------------------                              |
+| **main.html** |	The homepage showing welcome message and navigation to other pages |
+| **login.html** |	      Form for registered users to log in                        |
+| **signup.html** |      	Form for new users to sign up (saved in customers.json)    |
+| **order.html** |	      Submit pizza orders (saved in order.json)                  |
+| **reservation.html** |  Submit table reservations (saved in reservations.json)     |
 
-Cart stored in-memory on frontend
 
-When clicking Confirm Order, the cart is sent via POST to /api/cart
-
-Server saves it in orders.json along with logged-in user info
-```
