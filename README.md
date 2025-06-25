@@ -32,7 +32,7 @@ Pizza K is a modern pizza restaurant website with user authentication, interacti
 ## 📁 Project Structure
 
 PIZZA-K-MAIN/
-├── dist/                     # Compiled JavaScript files (from TypeScript)
+├── dist/                    # Compiled JavaScript files (from TypeScript)
 ├── node_modules/            # Project dependencies
 ├── public/                  # Static frontend assets
 │   ├── img/                 # Images used in the website
