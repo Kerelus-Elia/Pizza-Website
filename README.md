@@ -31,9 +31,6 @@ Pizza K is a modern pizza restaurant website with user authentication, interacti
 ```
 ## 📁 Project Structure
 
-graphql
-Copy
-Edit
 PIZZA-K-MAIN/
 ├── dist/                     # Compiled JavaScript files (from TypeScript)
 ├── node_modules/            # Project dependencies
@@ -68,7 +65,7 @@ PIZZA-K-MAIN/
 |-------------|----------------------------------------------------------|
 | **Frontend**| HTML5, CSS3, JavaScript, AOS.js                          |
 | **Backend** | Node.js, Express.js, Express-Session                     |
-| **Storage** | Local JSON files (`orders.json`, `Customers.json`)       |
+| **Storage** | Local JSON files (`orders.json`, `Customers.json `, `reservations.json`)       |
 | **Session** | `express-session` for authentication                    |
 | **Middleware** | Custom session check and JSON handling              |
 
